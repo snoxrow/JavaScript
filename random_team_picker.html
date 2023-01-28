@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monopoly Team Selector</title>
+  </head>
+
+  <body>
+    <h1>Team Maker!</h1>
+
+    <div class="greet">
+      Welcome to the Monopoly team maker! Press the button below to determine
+      your fate!
+    </div>
+    <button id="button" type="button">Roll!</button>
+    <button id="reset" type="button">Reset!</button>
+    <p id="result"></p>
+
+    <script>
+      let names = ["Yasseryy", "Toxic", "Yousof", "Yehya", "Adam", "sheikh"];
+      const namesBack = [
+        "Yasseryy",
+        "Toxic",
+        "Yousof",
+
+        "Yehya",
+        "Adam",
+        "sheikh",
+      ];
+      const teamSize = 2;
+      const button = document.getElementById("button");
+      const resetButton = document.getElementById("reset");
+      const feedback = document.getElementById("result");
+
+      function getTeam() {
+        let result = new Array();
+
+        if (names.length >= teamSize) {
+          for (i = 0; i < teamSize; i++) {
+            let randomiser = Math.floor(Math.random() * names.length);
+            let random = names[randomiser];
+            names.splice(randomiser, 1);
+            result.push(random);
+          }
+        }
+        return result;
+      }
+
+      button.addEventListener("click", function () {
+        let team = getTeam();
+        if (team.length < teamSize) {
+          feedback.innerHTML = "Insuffiecient number of players";
+        } else {
+          let text = "";
+          feedback.innerHTML = team;
+        }
+      });
+
+      resetButton.addEventListener("click", function () {
+        resetTeams();
+        feedback.innerHTML = "Game Resetted!";
+      });
+
+      function resetTeams() {
+        names = namesBack.slice();
+      }
+    </script>
+  </body>
+</html>
